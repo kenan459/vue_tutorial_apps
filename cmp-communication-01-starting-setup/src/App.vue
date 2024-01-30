@@ -3,6 +3,7 @@
     <header>
       <h1>My Friends</h1>
     </header>
+    <new-friend @add-contact="addContact"></new-friend>
     <ul>
       <friend-contact
         v-for="friend in friends"
@@ -14,6 +15,7 @@
         :is-favorite="friend.isFavorite"
         @toggle-favorite="toggleFavoriteStatus"
       ></friend-contact>
+
     </ul>
   </section>
 </template>
@@ -44,8 +46,17 @@ export default {
     toggleFavoriteStatus(friendID) {
       const identifiedFriend = this.friends.find(friend => friend.id === friendID);
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
-      
     },
+    addContact(name, phone, email) {
+      const newFriendContact = {
+        id: new Date().toISOString(),
+        name: name,
+        phone: phone,
+        email: email,
+        isFavorite: false,
+      };
+      this.friends.push(newFriendContact);
+    }
   },
 };
 </script>
@@ -76,7 +87,8 @@ header {
   padding: 0;
   list-style: none;
 }
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
