@@ -36,6 +36,9 @@ export default {
         this.enteredPhone,
         this.enteredEmail
       );
+      this.enteredName = '';
+      this.enteredPhone = '';
+      this.enteredEmail = '';
     },
   },
 };
